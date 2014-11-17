@@ -20,17 +20,9 @@ signal.signal(signal.SIGTERM, deregister)
 signal.signal(signal.SIGINT, deregister)
 
 while True:
-    ip = [
-        netifaces.ifaddresses(e) for e in netifaces.interfaces()
-    ][
-        netifaces.AF_INET
-    ][
-        netifaces.AF_INET
-    ][
-        0
-    ][
-        'addr'
-    ]
+    ip = netifaces.ifaddresses(
+        netifaces.gateways()['default'][netifaces.AF_INET][1]
+    )[netifaces.AF_INET][0]['addr']
 
     client.write('/db/addr', ip, ttl=30)
     sleep(10)
