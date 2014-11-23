@@ -2,6 +2,7 @@
 
 # NOTE: if run in docker, docker must be run with net=host !!!
 
+import sys
 import etcd
 import netifaces
 import signal
